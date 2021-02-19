@@ -22,9 +22,10 @@ namespace Blackbird\QuickCategorySave\Block\Adminhtml\Category\Edit;
 
 use Magento\Catalog\Block\Adminhtml\Category\AbstractCategory;
 use Magento\Framework\View\Element\UiComponent\Control\ButtonProviderInterface;
+use Magento\Ui\Component\Control\Container;
 
 
-class QuickSaveButton extends AbstractCategory implements ButtonProviderInterface
+class SaveButton extends AbstractCategory implements ButtonProviderInterface
 {
 
     /**
@@ -34,17 +35,41 @@ class QuickSaveButton extends AbstractCategory implements ButtonProviderInterfac
     {
         $category = $this->getCategory();
 
+
+
         if (!$category->isReadonly() && $this->hasStoreRootCategory()) {
+            return [
+                'label' => __('Quick Save'),
+                'class' => 'quicksave secondary',
+                'data_attribute' => [
+                    'mage-init' => ['button' => ['event' => 'save']],
+                    'form-role' => 'save',
+                    'quick-save' => true,
+                ],
+                'sort_order' => 30,
+            ];
+        }
+
+        /*if (!$category->isReadonly() && $this->hasStoreRootCategory()) {
             return [
                 'label' => __('Quick Save'),
                 'class' => 'save primary',
                 'data_attribute' => [
-                    'mage-init' => ['button' => ['event' => 'save']],
-                    'form-role' => 'save',
+                    'mage-init' => [
+                        'buttonAdapter' => [
+                            'actions' => [
+                                'targetName' => 'category_form.category_form',
+                                'actionName' => 'save',
+                                'params' => [
+                                    'quick-save' => true,
+                                    'form-role' => 'save',
+                                ]
+                            ]
+                        ]
+                    ],
                 ],
-                'sort_order' => 31,
             ];
-        }
+        }*/
 
         return [];
     }
