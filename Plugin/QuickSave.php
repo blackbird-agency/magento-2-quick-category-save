@@ -44,6 +44,7 @@ class QuickSave
 
     public function beforeExecute(Category $subject)
     {
+        die;
         $writer = new \Laminas\Log\Writer\Stream(BP . '/var/log/test.log');
         $logger = new \Laminas\Log\Logger();
         $logger->addWriter($writer);

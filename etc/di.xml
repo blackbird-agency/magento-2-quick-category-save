@@ -17,6 +17,6 @@
 -->
 <config>
     <type name="Magento\Catalog\Controller\Adminhtml\Category\Save">
-        <plugin name="quickCategorySave" type="Blackbird\QuickCategorySave\Plugin\QuickSave" sortOrder="1" disabled="false" />
+        <plugin name="quickCategorySave" type="Blackbird\QuickCategorySave\Plugin\QuickSave" sortOrder="1" />
     </type>
 </config>
