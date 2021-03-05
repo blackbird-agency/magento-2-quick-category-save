@@ -21,45 +21,23 @@ namespace Blackbird\QuickCategorySave\Plugin;
 
 
 use Magento\Catalog\Controller\Adminhtml\Category;
-use Magento\Catalog\Model\CategoryFactory;
 
 class QuickSave
 {
     /**
-     * @var \Magento\Catalog\Model\CategoryFactory
+     * Plugin which remove products changes if the quicksave cookie is activated
+     * @param \Magento\Catalog\Controller\Adminhtml\Category $subject
      */
-    private $categoryFactory;
-
-    /**
-     * QuickSave constructor.
-     * @param \Magento\Catalog\Model\CategoryFactory $categoryFactory
-     */
-    public function __construct
-    (
-        CategoryFactory $categoryFactory
-    )
+    public function beforeExecute(Category $subject): void
     {
-        $this->categoryFactory = $categoryFactory;
-    }
-
-    public function beforeExecute(Category $subject)
-    {
-        die;
-        $writer = new \Laminas\Log\Writer\Stream(BP . '/var/log/test.log');
-        $logger = new \Laminas\Log\Logger();
-        $logger->addWriter($writer);
-        $logger->info('au début');
-
 
         $categoryPostData = $subject->getRequest()->getPostValue();
 
-        if (isset($categoryPostData['category_products'])) {
+        if (isset($categoryPostData['category_products'])
+            && $subject->getRequest()->getCookie("quick_save", null)) {
             $categoryPostData['category_products'] = null;
         }
-        $logger->info("Before execute{}");
-
         $subject->getRequest()->setPostValue($categoryPostData);
 
-        return null;
     }
 }

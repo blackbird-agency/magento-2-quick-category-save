@@ -22,10 +22,9 @@ namespace Blackbird\QuickCategorySave\Block\Adminhtml\Category\Edit;
 
 use Magento\Catalog\Block\Adminhtml\Category\AbstractCategory;
 use Magento\Framework\View\Element\UiComponent\Control\ButtonProviderInterface;
-use Magento\Ui\Component\Control\Container;
 
 
-class SaveButton extends AbstractCategory implements ButtonProviderInterface
+class QuickSaveButton extends AbstractCategory implements ButtonProviderInterface
 {
 
     /**
@@ -35,42 +34,27 @@ class SaveButton extends AbstractCategory implements ButtonProviderInterface
     {
         $category = $this->getCategory();
 
-
-
         if (!$category->isReadonly() && $this->hasStoreRootCategory()) {
             return [
                 'label' => __('Quick Save'),
                 'class' => 'quicksave secondary',
-                'data_attribute' => [
-                    'mage-init' => ['button' => ['event' => 'save']],
-                    'form-role' => 'save',
-                    'quick-save' => true,
-                ],
+                'on_click' => $this->triggerSaveButton(),
                 'sort_order' => 30,
             ];
         }
 
-        /*if (!$category->isReadonly() && $this->hasStoreRootCategory()) {
-            return [
-                'label' => __('Quick Save'),
-                'class' => 'save primary',
-                'data_attribute' => [
-                    'mage-init' => [
-                        'buttonAdapter' => [
-                            'actions' => [
-                                'targetName' => 'category_form.category_form',
-                                'actionName' => 'save',
-                                'params' => [
-                                    'quick-save' => true,
-                                    'form-role' => 'save',
-                                ]
-                            ]
-                        ]
-                    ],
-                ],
-            ];
-        }*/
-
         return [];
+    }
+
+    /**
+     * JavaScript code of the onclick function
+     * @return string
+     */
+    public function triggerSaveButton(): string
+    {
+        return "const date = new Date();
+        date.setTime(date.getTime() + (10*1000));
+        document.cookie = 'quick_save=1; expires=' + date.toUTCString() + '; path=/';
+        document.getElementById('save').click();";
     }
 }
