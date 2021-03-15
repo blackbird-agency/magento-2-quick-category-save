@@ -3,7 +3,7 @@
 [![License: MIT](https://img.shields.io/github/license/blackbird-agency/vat-checker-proxy-server.svg?style=flat-square)](./LICENSE)
 
 Quick Category Save module create a new button in the category page which save all the configurations of a category without product update, preventing it to be offline for too much time.
-The free source is available at the [GitHub repository]()
+The free source is available at the [GitHub repository](https://github.com/blackbird-agency/magento-2-quick-category-save)
 
 ## Setup
 
@@ -48,8 +48,8 @@ For further information, contact us:
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE]() file for details.
+This project is licensed under the MIT License - see the [LICENSE](./LICENSE) file for details.
 
-***That's all folks!***
+***That's all folks !***
 
 
