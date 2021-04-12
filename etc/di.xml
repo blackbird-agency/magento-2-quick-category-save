@@ -17,6 +17,9 @@
 -->
 <config>
     <type name="Magento\Catalog\Controller\Adminhtml\Category\Save">
-        <plugin name="quickCategorySave" type="Blackbird\QuickCategorySave\Plugin\QuickSave" sortOrder="1" />
+        <plugin name="Blackbird_QuickCategorySave::saveAction" type="Blackbird\QuickCategorySave\Plugin\QuickSave" sortOrder="1" />
+    </type>
+    <type name="Magento\Catalog\Model\ResourceModel\Category" >
+        <plugin name="Blackbird_QuickCategorySave::removeCategoryProducts" sortOrder="1000" type="Blackbird\QuickCategorySave\Plugin\Catalog\Model\ResourceModel\Category" />
     </type>
 </config>
